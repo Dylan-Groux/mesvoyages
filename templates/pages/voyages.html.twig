@@ -1,6 +1,36 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<h1>Page des voyages !</h1>
-<a href="{{path('accueil')}}">accueil</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Ville</th>
+            <th scope="col">Pays</th>
+            <th scope="col">Note</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for visite in visites %}
+            <tr>
+                <th scope="row">{{ visite.ville }}</th>
+                <td>{{ visite.pays }}</td>
+                <td class="text-end">
+                    <strong>
+                        {% if visite.note<10 %}
+                        <div class="text-danger">
+                            {{ visite.note}}/20
+                        </div>
+                        {%  else  %}
+                        <div class="text-success">
+                            {{ visite.note }}/20
+                        </div>
+                        {% endif %}
+                    </strong>
+                </td>
+                <td>{{ visite.datecreationstring }}</td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
