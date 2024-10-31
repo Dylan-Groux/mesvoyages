@@ -4,10 +4,34 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col">Ville</th>
-            <th scope="col">Pays</th>
-            <th scope="col">Note</th>
-            <th scope="col">Date</th>
+            <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+                Ville
+                <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'ville', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'ville', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+                </div>
+            </th>            
+            <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+                Pays
+                <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'pays', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'pays', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+                </div>
+            </th>
+            <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+                Note
+                <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'note', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'note', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+                </div>
+            </th>
+            <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+                Date
+                <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'datecreation', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                    <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'datecreation', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+                </div>
+            </th>
         </tr>
         </thead>
         <tbody>
