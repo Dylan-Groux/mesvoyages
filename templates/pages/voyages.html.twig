@@ -53,7 +53,7 @@
         <tbody>
     {% for visite in visites %}
             <tr>
-                <th scope="row">{{ visite.ville }}</th>
+                <td scope="row"><a href="{{ path('voyages.showone', {id:visite.id}) }}">{{ visite.ville }}</a></td>
                 <td>{{ visite.pays }}</td>
                 <td class="text-end">
                     <strong>
