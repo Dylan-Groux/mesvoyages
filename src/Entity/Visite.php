@@ -128,4 +128,9 @@ class Visite
             return $this->datecreation->format("d/m/Y");
         }
     }
+
+    public function getDatecreation(): ?\DateTimeInterface
+    {
+        return $this->datecreation;
+    }
 }

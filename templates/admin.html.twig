@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {% endblock %}
+
+{% block stylesheets %} {% endblock %}
+
+{% block top %}
+
+{% endblock %}
+
+{% block body %} 
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope='col' style="padding: 1px 1px; font-size: 1.6em; text-align: center;">
+            Ville
+            <div style="display: flex-col; justify-content: center; gap: 5px;">
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'ville', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'ville', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+                <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                    <form class="form-inline" method="POST" action="{{ path("voyages.findallequal", {champ:'ville'}) }}">
+                        <div style="display: flex; align-items: center;" class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" name="recherche" placeholder="Entrez la ville recherchée" style="height: 1.9em;">
+                            <button type="submit" class="btn btn-primary mb-2" style="height: 1.9em; line-height: 1; margin-top: 7px; margin-left: 0.8em">FILTRER</button>
+                        </div>
+                    </form>
+                </div>    
+            </div>
+        </th>            
+        <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+            Pays
+            <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'pays', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'pays', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                <form class="form-inline" method="POST" action="{{ path("voyages.findallequal", {champ:'pays'}) }}">
+                    <div style="display: flex; align-items: center;" class="form-group mx-sm-3 mb-2">
+                        <input type="text" class="form-control" name="recherche" placeholder="Entrez la ville recherchée" style="height: 1.9em;">
+                        <button type="submit" class="btn btn-primary mb-2" style="height: 1.9em; line-height: 1; margin-top: 7px; margin-left: 0.8em">FILTRER</button>
+                    </div>
+                </form>
+            </div>    
+        </th>
+        <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+            Date
+            <div style="display: flex; justify-content: center; margin-top: 5px; gap: 5px;">
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'datecreation', ordre:'ASC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;"><</a>
+                <a class="btn btn-primary btn-sm" href="{{ path('voyages.sort', {champ:'datecreation', ordre:'DESC'}) }}" role="button" style="padding: 2px 5px; font-size: 0.4em;">></a>
+            </div>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for visite in visites %}
+        <tr>
+            <td scope="row">{{ visite.ville }}</td>
+            <td>{{ visite.pays }}</td>
+            <td>{{ visite.datecreationstring }}</td>
+            <td>
+                <a  href="{{ path('admin.voyage.edit', {id:visite.id}) }}" class="btn btn-secondary">Editer</a>
+                <a  href="{{ path('admin.voyage.suppr', {id:visite.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer {{ visite.ville }} ?')" class="btn btn-danger">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+{% endblock %}
+    
+{% block javascripts %} {% endblock %}
