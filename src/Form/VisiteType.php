@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use \DateTime;
 
 
 class VisiteType extends AbstractType
@@ -17,9 +18,11 @@ class VisiteType extends AbstractType
         $builder
             ->add('ville')
             ->add('pays')
-            ->add('datecreation', null, [
+            ->add('datecreation', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Date'
+                'label' => 'Date',
+                'data' => isset($option['data']) &&
+                    $option['data']->getDateCreation() != null ? $option['data']->getDateCreation() : new DateTime ('now'),
             ])
             ->add('note')
             ->add('avis')
