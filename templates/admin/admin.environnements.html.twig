@@ -1,0 +1,33 @@
+{% extends "baseadmin.html.twig" %}
+
+{% block body %}
+    <form class="form-inline mt-1" method="POST" action=" {{ path("admin.environnement.ajout") }}">
+        <div class="form-group mr-1 mb-2">
+            <input type="text" class="sm" name="nom">
+            <button type="submit" class="btn btn-primary mb-2 btn-sm">
+                Ajouter
+            </button>
+        </div>
+    </form>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope='col' style="padding: 1px 1px; font-size: 1.6em; text-align: center;">
+                Ville
+            </th>            
+            <th scope='col' style="padding: 6px 5px; font-size: 1.6em; text-align: center;">
+                Pays
+            </th>
+    {% for environnement in environnements %}
+        <tr>
+            <td scope="row">{{ environnement.nom }}</td>
+            <td>
+                <a  href="{{ path('admin.environnement.suppr', {id:environnement.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer {{ environnement.nom }} ?')" class="btn btn-danger">Supprimer</a>
+                <a  href="{{ path('admin.voyage.ajout') }}" onclick="return confirm('Etes-vous sûr de vouloir crée une nouvelle visite ?')" class="btn btn-primary btn-smr">Ajouter</a>
+            </td>
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
