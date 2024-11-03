@@ -20,6 +20,10 @@
                         {% endif %}
                     </strong>
                 <h5 class="title">Départ à {{ visite.tempmax }}°, Arriver à {{ visite.tempmin }}°</h5>
+                <h6 class='title'><strong>Environnements</strong></h6>
+                {% for environnement in visite.environnements %}
+                {{ environnement.nom }}
+                {% endfor %} 
             </div>
         </div>
 
