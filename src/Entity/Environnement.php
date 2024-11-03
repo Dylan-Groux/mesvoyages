@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EnvironnementRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 #[ORM\Entity(repositoryClass: EnvironnementRepository::class)]
 class Environnement
