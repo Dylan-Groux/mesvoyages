@@ -28,19 +28,23 @@
         </div>
 
         <!-- Section photo et avis -->
-        <div class="row">
+        <div class="col text-center justify-center align-center">
             <!-- Emplacement photo -->
-            <div class="col-md-6 mb-3">
+            <div class="col mb-3">
                 <div class="photo-placeholder text-center p-4">
-                    <img src="https://via.placeholder.com/300" alt="Photo" class="img-fluid rounded">
+                        {% if visite.imageName %}
+                            <img src="{{ app.request.getBasePath() ~vich_uploader_asset(visite, 'imageFile') }}" class="card-img-top" style="max-width:100%; height:auto;">
+                        {% else %}
+                            <p>Aucune Image</p>
+                        {% endif %}
                 </div>
             </div>
             <!-- Emplacement avis -->
-            <div class="col-md-6 mb-3">
+            <div class="col mb-3">
                 <div class="avis-placeholder text-center p-4">
                     <blockquote class="blockquote">
                         <p class="mb-0">"Ceci est un exemple d'avis. Un excellent produit que je recommande !"</p>
-                        <footer class="blockquote-footer">Client satisfait</footer>
+                        <footer class="blockquote-footer mt-3">Client satisfait</footer>
                     </blockquote>
                 </div>
             </div>
