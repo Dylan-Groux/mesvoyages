@@ -39,22 +39,31 @@ class Visite
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context) {
         $file = $this->getImageFile();
-        if ($file != null && $file != "") {
-            $poids= @filesize($file);
-            if($poids != false && $poids > 10485760) {
-                $context->buildViolation("Cette image est trop lourde (10Mo max)")
-                        ->atPath('imageFile')
-                        ->addViolation();
-            }
+    
+        // Vérification de la présence du fichier
+        if ($file === null) {
+            // Pas d'image fournie, donc ne rien faire (ou une autre action si nécessaire)
+            return;
         }
-        $infosImage= @getimagesize($file);
-            if($infosImage == false) {
-                $context->buildViolation("Ce fichier n'est pas une Image ! ")
-                        ->atPath('imageFile')
-                        ->addViolation();
-            }
-
+    
+        // Vérification de la taille du fichier
+        $poids = @filesize($file);
+        if ($poids !== false && $poids > 10485760) { // 10 Mo en octets
+            $context->buildViolation("Cette image est trop lourde (10Mo max)")
+                    ->atPath('imageFile')
+                    ->addViolation();
+            return; // Sortir de la méthode après avoir ajouté la violation
+        }
+    
+        // Vérification si le fichier est une image
+        $infosImage = @getimagesize($file);
+        if ($infosImage === false) {
+            $context->buildViolation("Ce fichier n'est pas une image !")
+                    ->atPath('imageFile')
+                    ->addViolation();
+        }
     }
+    
 
 
 
