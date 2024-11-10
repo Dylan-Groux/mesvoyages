@@ -12,6 +12,7 @@ use \DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Environnement;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class VisiteType extends AbstractType
 {
@@ -26,7 +27,12 @@ class VisiteType extends AbstractType
                 'data' => isset($option['data']) &&
                     $option['data']->getDateCreation() != null ? $option['data']->getDateCreation() : new DateTime ('now'),
             ])
-            ->add('note')
+            ->add('note', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' => 20
+                ]
+            ])
             ->add('avis')
             ->add('tempmin', null, [
                 'label' => 'Température maximum'

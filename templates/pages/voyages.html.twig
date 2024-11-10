@@ -13,6 +13,7 @@
                         <form class="form-inline" method="POST" action="{{ path("voyages.findallequal", {champ:'ville'}) }}">
                             <div style="display: flex; align-items: center;" class="form-group mx-sm-3 mb-2">
                                 <input type="text" class="form-control" name="recherche" placeholder="Entrez la ville recherchée" style="height: 1.9em;">
+                                <input type="hidden" name="_token" value=" {{ csrf_token('filtre_ville') }}">
                                 <button type="submit" class="btn btn-primary mb-2" style="height: 1.9em; line-height: 1; margin-top: 7px; margin-left: 0.8em">FILTRER</button>
                             </div>
                         </form>
@@ -29,6 +30,7 @@
                     <form class="form-inline" method="POST" action="{{ path("voyages.findallequal", {champ:'pays'}) }}">
                         <div style="display: flex; align-items: center;" class="form-group mx-sm-3 mb-2">
                             <input type="text" class="form-control" name="recherche" placeholder="Entrez la ville recherchée" style="height: 1.9em;">
+                            <input type="hidden" name="_token" value=" {{ csrf_token('filtre_pays') }}">
                             <button type="submit" class="btn btn-primary mb-2" style="height: 1.9em; line-height: 1; margin-top: 7px; margin-left: 0.8em">FILTRER</button>
                         </div>
                     </form>
