@@ -1,3 +1,22 @@
-body {
-    background-color: skyblue;
+/* Pour uniformiser les images dans les cartes */
+.img-uniform {
+    height: 200px; /* Ajustez selon vos préférences */
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Assurez que les cartes remplissent toute la hauteur de leur conteneur */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+/* Pour ajuster la taille de la police */
+.description {
+    font-size: 16px; /* Par exemple */
 }

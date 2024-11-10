@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Visite;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\VisiteRepository;
 
 /**
  * @extends ServiceEntityRepository<Visite>
@@ -71,5 +72,14 @@ class VisiteRepository extends ServiceEntityRepository
     {
         $this->getEntityManager()->persist($visite);
         $this->getEntityManager()->flush();
+    }
+
+    public function findLatestVisite(int $limit = 2)
+    {
+        return $this->createQueryBuilder('v')
+        ->orderby('v.datecreation', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
     }
 }

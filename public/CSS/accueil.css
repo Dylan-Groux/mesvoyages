@@ -1,0 +1,44 @@
+      /* Ajouter un fond personnalisé */
+    body {
+        background-image: url('images/backgroundtest.jpg'); /* Remplacez par votre image */
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .description {
+        color: #0D3B66; /* Bleu marine */
+        font-size: 0.7rem;
+    }
+    /* Style pour le contour noir au survol */
+    .btn {
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #0D3B66;
+        color: white;
+        transform: scale(1.05); /* Agrandissement léger */
+    }
+    /* Pour uniformiser les images dans les cartes */
+.img-uniform {
+    height: 200px; /* Ajustez selon vos préférences */
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Assurez que les cartes remplissent toute la hauteur de leur conteneur */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-body {
+    flex-grow: 1;
+}
+
+.custom-font {
+    font-family: 'Arial', sans-serif; /* Remplace par la police que tu souhaites */
+    font-size: 10px; /* Taille de la police */
+    font-weight: normal; /* Rendre la police normale (ou 'bold' pour du gras) */
+    font-style: italic; /* Utilise 'normal' pour le texte non-italique */
+}
