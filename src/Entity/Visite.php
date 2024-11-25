@@ -77,6 +77,7 @@ class Visite
     private ?\DateTimeInterface $datecreation = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Range(min: 0, max: 20)]
     private ?int $note = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -86,6 +87,7 @@ class Visite
     private ?int $tempmin = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan(propertyPath:"tempmin")]
     private ?int $tempmax = null;
 
     /**
@@ -128,8 +130,17 @@ class Visite
         return $this;
     }
 
-    public function setDatecreation(?\DateTimeInterface $datecreation): static
+    /**
+     * @Assert\Date
+     * @Assert\LessThanOrEqual("today", message="La date de création ne peut pas être dans le futur.")
+     */
+    public function setDatecreation(?\DateTimeInterface $datecreation): self
     {
+        $now = new \DateTime('today');
+        if ($datecreation > $now) {
+            throw new \InvalidArgumentException("La date de creation ne peut pas être dans le futur.");
+        }
+
         $this->datecreation = $datecreation;
 
         return $this;
@@ -193,6 +204,35 @@ class Visite
         }
     }
 
+    public function setDatecreationFromString(string $datecreationString): static
+    {
+        // Supprime les espaces inutiles
+        $datecreationString = trim($datecreationString);
+        
+        // Si la chaîne est déjà au format Y-m-d, on la transforme en d/m/Y
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $datecreationString)) {
+            // Convertit la chaîne du format Y-m-d au format d/m/Y
+            $datecreationString = \DateTime::createFromFormat('Y-m-d', $datecreationString)->format('d/m/Y');
+        }
+    
+        // Tentative de création de la date à partir de la chaîne avec le format d/m/Y
+        $date = \DateTime::createFromFormat("d/m/Y", $datecreationString);
+    
+        // Vérifie si la conversion a échoué
+        if ($date === false) {
+            // Vérifie les erreurs de format
+            $errors = \DateTime::getLastErrors();
+            
+            // Lève une exception avec un message détaillant l'erreur
+            throw new \InvalidArgumentException("Le format de la date est invalide. Erreurs: " . implode(", ", $errors['errors']));
+        }
+    
+        // Assigne la valeur de la date si elle est valide
+        $this->datecreation = $date;  
+    
+        return $this;
+    }
+    
     public function getDatecreation(): ?\DateTimeInterface
     {
         return $this->datecreation;
